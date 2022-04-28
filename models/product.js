@@ -15,11 +15,12 @@ module.exports = (sequelize, DataTypes) => {
       this.hasOne(models.Type,{foreignKey:'type_id'})
       this.hasOne(models.Shape,{foreignKey:'shape_id'})
       this.hasOne(models.Flavour,{foreignKey:'original_flavour_id'})
+      this.hasOne(models.ProductDetails,{foreignKey:'prod_det_id'})
     }
   }
   Product.init({
     title: DataTypes.STRING,
-    desc: DataTypes.STRING,
+    desc: DataTypes.STRING(500),
     cat_id: DataTypes.INTEGER,
     type_id: DataTypes.INTEGER,
     unit_price: DataTypes.INTEGER,

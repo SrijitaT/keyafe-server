@@ -5,15 +5,12 @@ module.exports = {
     await queryInterface.createTable('Products', {
       id: {
         allowNull: false,
-        autoIncrement: true,
         primaryKey: true,
-        type: Sequelize.INTEGER
+        type: Sequelize.UUID,
+        defaultValue: Sequelize.UUIDV4
       },
       title: {
         type: Sequelize.STRING
-      },
-      desc: {
-        type: Sequelize.STRING(500)
       },
       cat_id: {
         type: Sequelize.INTEGER,
@@ -25,10 +22,6 @@ module.exports = {
         },
         allowNull: false
       },
-      qty:{
-        type:Sequelize.INTEGER,
-        defaultValue : 1
-      },
       type_id: {
         type: Sequelize.INTEGER,
         references:{
@@ -38,12 +31,6 @@ module.exports = {
           key: "id"
         },
         allowNull: false
-      },
-      unit_price: {
-        type: Sequelize.INTEGER
-      },
-      weight: {
-        type: Sequelize.INTEGER
       },
       img_url: {
         type: Sequelize.STRING
@@ -67,6 +54,16 @@ module.exports = {
           key: "id"
         },
         allowNull: true
+      },
+      prod_det_id:{
+        type: Sequelize.INTEGER,
+        references:{
+          model:{
+            tableName:"productdetails"
+          },
+          key: "id"
+        },
+        allowNull: false
       },
       createdAt: {
         allowNull: false,

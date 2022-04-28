@@ -1,6 +1,6 @@
 const express = require("express");
 const router = express.Router();
-const fl_controller = require("../../controller/flavour.controller");
+const fl_controller = require("../../controller/FlavourController");
 const {verifyUserIsAdmin} = require("../../middleware/validateToken");
 
 //@route GET api/products

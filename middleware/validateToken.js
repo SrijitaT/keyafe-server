@@ -1,11 +1,11 @@
 const jwt = require("jsonwebtoken");
-const keys = require("../config/jwt/keys");
-const {getUserRole} = require("../controller/user.controller");
+const {auth} = require("../config/app.config");
+const {getUserRole} = require("../controller/UserController");
 
 let validateToken = (req,res,next) => {
     let tokenValue = req.headers["authorization"];
     if(tokenValue){
-        jwt.verify(tokenValue,keys.secretOrKey,(err,data) => {
+        jwt.verify(tokenValue,auth.jwt_secret,(err,data) => {
             if(err){
                 return res.status(500).json({status:0,message:'Invalid Token'}) 
             }else{
@@ -21,12 +21,12 @@ let validateToken = (req,res,next) => {
 let verifyUserIsAdmin = (req,res,next) => {
     let tokenValue = req.headers["authorization"];
     if(tokenValue){
-        jwt.verify(tokenValue,keys.secretOrKey,async (err,data) => {
+        jwt.verify(tokenValue,auth.jwt_secret,async (err,data) => {
             if(err){
                 return res.status(500).json({status:0,message:'Invalid Token'}) 
             }else{
                 let role = await getUserRole(data.id);
-               if(role=="admin"){
+               if(role == "admin"){
                     req.data = data;
                     next();
                }else{

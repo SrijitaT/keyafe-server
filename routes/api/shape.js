@@ -1,6 +1,6 @@
 const express = require("express");
 const router = express.Router();
-const shape_controller = require("../../controller/shape.controller");
+const shape_controller = require("../../controller/ShapeController");
 const {verifyUserIsAdmin} = require("../../middleware/validateToken");
 
 //@route GET api/products

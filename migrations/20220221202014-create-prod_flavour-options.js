@@ -9,7 +9,7 @@ module.exports = {
         type: Sequelize.INTEGER
       },
       prod_id: {
-        type: Sequelize.INTEGER,
+        type: Sequelize.UUID,
         references:{
           model:{
             tableName:"products"

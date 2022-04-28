@@ -1,91 +1,79 @@
 'use strict';
 const {serverUrl} = require('../config/url.config');
+const {v4: uuidv4} = require('uuid');
+
 
 module.exports = {
   async up (queryInterface, Sequelize) {
     await queryInterface.bulkInsert('products', [{
+      id:uuidv4(),
       title: 'Fenced Black Forest cake',
       img_url: `${serverUrl}/uploads/images/products/blackforest1-1_1645990159567.jpg`,
-      desc: 'A black forest cake surrounded by fence like looking chocolate',
-      cat_id: 6,
-      qty: 1,
+      cat_id: 1,
       type_id: 1,
-      unit_price: 550,
-      weight: 500,
       shape_id: 1,
-      original_flavour_id:10
+      original_flavour_id:10,
+      prod_det_id:1
     },
     {
+      id:uuidv4(),
       title: 'Choco chunk cookies',
       img_url: `${serverUrl}/uploads/images/products/chocochunkcookies_1645990492541.jpeg`,
-      desc: 'Delicious chewy and crunchy choco chunk cookies',
-      cat_id: 7,
-      qty: 10,
+      cat_id: 2,
       type_id: 7,
-      unit_price: 150,
-      weight: 200,
       shape_id: 1,
-      original_flavour_id:24
+      original_flavour_id:24,
+      prod_det_id:2
     },
     {
+      id:uuidv4(),
       title: 'Chocolate praline cake',
       img_url: `${serverUrl}/uploads/images/products/chocolate-praline_1645990122535.jpeg`,
-      desc: 'Rich chocolate cake with caramelized nuts.Its so yummy you cant stop at one bite',
-      cat_id: 6,
-      qty: 1,
+      cat_id: 1,
       type_id: 1,
-      unit_price: 550,
-      weight: 500,
       shape_id: 1,
-      original_flavour_id:18
+      original_flavour_id:18,
+      prod_det_id:3
     },
     {
+      id:uuidv4(),
       title: 'Designer anniversary cake',
       img_url: `${serverUrl}/uploads/images/products/designer1_1645990261513.jpeg`,
-      desc: 'A black forest cake surrounded by fence like looking chocolate',
-      cat_id: 6,
-      qty: 1,
+      cat_id: 1,
       type_id: 3,
-      unit_price: 1000,
-      weight: 600,
       shape_id: 3,
-      original_flavour_id:2
+      original_flavour_id:2,
+      prod_det_id:4
     },
     {
+      id:uuidv4(),
       title: 'Rasmalai Cake',
       img_url: `${serverUrl}/uploads/images/products/rasmalai_1_1645890860580.jpg`,
-      desc: 'Cake filled with layers of rasmalai cream',
-      cat_id: 6,
-      qty: 1,
+      cat_id: 1,
       type_id: 1,
-      unit_price: 650,
-      weight: 500,
       shape_id: 1,
-      original_flavour_id:7
+      original_flavour_id:7,
+      prod_det_id:5
     },
     {
+      id:uuidv4(),
       title: 'Colourful cake with rice paper sails',
       img_url: `${serverUrl}/uploads/images/products/designer2_1645990261515.jpeg`,
-      desc: 'Colourful cake with rice paper sails',
-      cat_id: 6,
-      qty: 1,
+      cat_id: 1,
       type_id: 3,
-      unit_price: 550,
-      weight: 500,
       shape_id: 1,
-      original_flavour_id:13
+      original_flavour_id:13,
+      prod_det_id:6
     },
     {
+      id:uuidv4(),
       title: 'Housespecial Spicy chicken tikki naan',
       img_url: `${serverUrl}/uploads/images/products/tikkinaan_1645890860585.jpeg`,
-      desc: 'Spicy chicken tikki naan',
-      cat_id: 8,
-      qty: 4,
+      cat_id: 3,
       type_id: 1,
-      unit_price: 250,
-      weight: 300,
       shape_id: null,
-      original_flavour_id:null
+      original_flavour_id:null,
+      prod_det_id:7
     }
   ])
   },
