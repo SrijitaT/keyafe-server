@@ -39,6 +39,7 @@ class ProductController extends BaseController{
   async insertToDbAfterUpload(req,res){
     try {
       let { title,desc,cat_id,type_id,unit_price,qty,weight,shape_id,original_flavour_id,currency,qty_measure,unit } = req.body;
+      const img_url = this.getMediaHostPath(req);
       const result = await sequelize.transaction(async (t) => {
         const prod_det = await this.create(req,'ProductDetails',{ desc,unit_price,qty,weight,currency,
           qty_measure,unit},{transaction:t})
