@@ -10,7 +10,7 @@ class TypeController extends BaseController{
     const options = null;
     try{
       let type = await super.getAllByCustomOptions(req,"Type",options);
-      type = this.getActualObjFromSequelizeRes(type);
+      type = super.getActualObjFromSequelizeRes(type);
       reqHandler.sendSuccess(res)(type);
     }catch(err){
       reqHandler.sendError(req,res,err);

@@ -5,7 +5,7 @@ require('dotenv').config();
 // config.js
 module.exports = {
 	app: {
-		port: process.env.DEV_APP_PORT || 3000,
+		port: process.env.DEV_APP_PORT || 5000,
 		appName: process.env.APP_NAME || 'keyafe',
 		env: process.env.NODE_ENV || 'development',
 	},

@@ -7,17 +7,20 @@ class BaseController {
 		this.options = options;
     }
 	getActualObjFromSequelizeRes(seq_res){
-		//console.log("seq_res=====",Object.keys(seq_res));
-		//return seq_res.map(s=>s.dataValues);
+		if(Array.isArray(seq_res)){
+			return seq_res.map(s=>{
+				return s.dataValues
+			});
+		}
 		return seq_res.dataValues;
 	}
     async getById(req,modelName,id){
         const reqParam = req?req.params.id:id;
 		let result;
 		try {
-			result = await req.app.get('db')[modelName].findByPk(reqParam)
+			console.log("reqParam=",reqParam," modelName =",modelName);
+			result = await req.app.get('db')[modelName].findByPk(reqParam);
 			reqHandler.throwIf(result => !result, 404, 'not found', 'Resource not found');
-			//return Promise.resolve(result)
 		} catch (err) {
 			let errorObj = err.status && err.errorType ? err : {status:500,errorType:"sequelize error ,some thing wrong with either the data base connection or schema",errorMsg:err};
 			return Promise.reject(errorObj);
@@ -38,7 +41,7 @@ class BaseController {
         let result;
 		try {
 			result = await req.app.get('db')[modelName].findAll(options);
-			console.log("result===",result);
+			//console.log("result===",result);
 			//return Promise.resolve(result)
 		} catch (err) {
 			return Promise.reject(err);

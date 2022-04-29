@@ -11,9 +11,14 @@ class UserController extends BaseController{
   constructor(){
     super();
   }
- async getUserRole(id){
-    const user = await this.getById(null,'User',id)
-    return user.dataValues.role;
+  async getUserRole(req,id){
+    try{
+        req.params.id = id;
+        const user = await this.getById(req,'User',id)
+        return user.dataValues.role;
+    }catch(err){
+          console.log("caught err in getUserRole ",err)
+    }
   }
   async registerUser(req,res){
     try{
@@ -32,8 +37,8 @@ class UserController extends BaseController{
 			const { error } = schema.validate(data);
 			reqHandler.validateJoi(error, 400, 'bad Request', error ? error.message : '');
             
-                let result = super.create(req,'User',data);
-                reqHandler.sendSuccess(res,"User registered successfully!",201)(result);
+            let result = super.create(req,'User',data);
+            reqHandler.sendSuccess(res,"User registered successfully!",201)(result);
     }catch(err){
                 reqHandler.sendError(req,res,err);
     }
@@ -60,7 +65,7 @@ class UserController extends BaseController{
         }
     
     const isMatch = await current_user.isValidPassword(req.body.password);
-    current_user = this.getActualObjFromSequelizeRes(current_user);
+    current_user = super.getActualObjFromSequelizeRes(current_user);
     if (isMatch) {
         //User Matched
         let payload = {...current_user}; //Create JWT payload
@@ -71,17 +76,15 @@ class UserController extends BaseController{
             payload,auth.jwt_secret,{ expiresIn: 3600 },
             (err, token) => {
                 if(token){
-                    let resp = {token: "Bearer " + token};
-                    reqHandler.sendSuccess(res,"Login Successful",200)(resp);
+                    const resp = {token: "Bearer " + token};
+                    reqHandler.sendSuccess(res,"Login Successful",200)({},resp);
                 }else{
                     reqHandler.sendError(req,res,err);
                 }
             }
         );
     } else {
-        errors.password = "Password incorrect!";
-        errors.status = 400;
-        reqHandler.sendError(req,res,errors);
+        reqHandler.sendError(req,res,{"msg":"Password Incorrect!",status:400});
     }
 }
 catch (err) {

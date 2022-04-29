@@ -6,10 +6,10 @@ class UploadUsingMulter{
         this.folderPath = folderPath;
     }
     storage(){
-        multer.diskStorage({
+        return multer.diskStorage({
             destination: function (req, file, cb) {
               cb(null, path.join(__dirname, this.folderPath));
-            },
+            }.bind(this),
           
             // By default, multer removes file extensions so let's add them back
             filename: function (req, file, cb) {
@@ -19,8 +19,7 @@ class UploadUsingMulter{
           });
     }
     upload(fileFilter){
-      console.log("returning multer ",fileFilter);
-        return multer({ storage:this.storage, fileFilter })
+        return multer({ storage:this.storage(), fileFilter })
     }
 }
 

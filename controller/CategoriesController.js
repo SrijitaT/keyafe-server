@@ -1,44 +1,57 @@
-const { imageFilter } = require("../helpers/validation/image");
+const imageFilter = require("../helpers/validation/image");
 const UploadUsingMulter = require("../helpers/utils/UploadUsingMulter");
 const BaseController = require("./BaseController");
 const reqHandler = require("../helpers/utils/RequestHandler");
-//const models = require("../models");
 
 
 class CategoriesController extends BaseController{
   constructor(){
     super();
-    this.folderPath = '/../public/uploads/images/categories';
+    this.folderPath = '/../../public/uploads/images/categories';
     this.mediaHostUrl = '/uploads/images/categories/';
     this.upUsingMulter = new UploadUsingMulter(this.folderPath)
   }
-  upload(){
-    return this.upUsingMulter.upload(imageFilter);
+  
+  uploadFile(){
+    return this.upUsingMulter.upload(imageFilter).single('file');
   }
+
+  upload(req,res,next){
+    const cb = this.validateImgCb.bind(this,req,res,next);
+    return this.uploadFile()(req,res,cb);
+  }
+
   getMediaHostPath(req){
-    return `${req.protocol}"://"${req.hostname}":"${req.app.get("port")}${this.mediaHostUrl}${req.file.filename}`;
+    return `${req.protocol}://${req.hostname}:${req.app.get("port")}${this.mediaHostUrl}${req.file.filename}`;
   }
-   async validateAndInsertToDbAfterUpload(req,res){
-    let { title, desc ,name} = req.body;
+
+   async validateImgCb(req,res,next){
     if (req.fileValidationError) {
-      return res.send(req.fileValidationError);
+      reqHandler.sendError(req,res,req.fileValidationError);
     }
     else if (!req.file) {
-      return res.send('Please select an image to upload');
+      reqHandler.sendError(req,res,"Please select an image to upload")
+    }else{
+      next();
     }
-    const img_url = this.getMediaHostPath(req);
+  }
+
+  async insertToDbAfterUpload(req,res){
     try{
+      let { title, desc ,name} = req.body;
+      const img_url = this.getMediaHostPath(req);
       let result = await this.create(req, 'Categories', { name,title, img_url, desc });
       reqHandler.sendSuccess(res, 'Category created successfully')(result);
     }catch(err){
       reqHandler.sendError(req,res,err);
     }
   }
+
   async getAllCategories(req,res){
     try{
-      let options = {attributes:["id","title","name","img_url","desc"]};
+      const options = {attributes:["id","title","name","img_url","desc"]};
       let categories = await super.getAllByCustomOptions(req,"Categories",options);
-      categories = this.getActualObjFromSequelizeRes(categories);
+      categories = super.getActualObjFromSequelizeRes(categories);
       reqHandler.sendSuccess(res)(categories);
      }catch(err){
       reqHandler.sendError(req,res,err);

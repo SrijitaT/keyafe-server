@@ -6,6 +6,7 @@ var logger = require('morgan');
 let cookieSession = require('cookie-session');
 let passport = require("passport");
 let cors = require("cors");
+const swagger = require('./helpers/swagger');
 
 var indexRouter = require('./routes/api/index');
 var usersRouter = require('./routes/api/users');
@@ -16,12 +17,14 @@ let shapesRouter = require("./routes/api/shape");
 let typeRouter = require("./routes/api/type");
 
 var app = express();
+
 let clientUrl = "http://localhost:3000";
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
 app.set('db', require('./models/index.js'));
-app.set('port',5000);
+app.set('port', process.env.DEV_APP_PORT);
+app.use('/api/docs', swagger.router);
 app.use(logger('dev'));
 
 app.use(express.urlencoded({ extended: false }));

@@ -10,7 +10,7 @@ class ShapeController extends BaseController{
     const options = null;
     try{
       let shape = await super.getAllByCustomOptions(req,"Shape",options);
-      shape = this.getActualObjFromSequelizeRes(shape);
+      shape = super.getActualObjFromSequelizeRes(shape);
       reqHandler.sendSuccess(res)(shape);
     }catch(err){
       reqHandler.sendError(req,res,err);
