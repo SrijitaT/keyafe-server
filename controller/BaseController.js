@@ -65,16 +65,15 @@ class BaseController {
 		}
 		return result;
     }
-    async create(req,modelName,data){
+    async create(req,modelName,data,transaction){
         let obj = data;
 		if (_.isUndefined(obj)) {
 			obj = req.body;
 		}
 		let result;
 		try {
-			result = await req.app.get('db')[modelName].build(obj).save();
-			let savedResource = reqHandler.throwIf(result => !result, 500, 'Internal server error', 'something went wrong couldnt save data')
-		    //return Promise.resolve(savedResource)
+			result = await req.app.get('db')[modelName].build(obj).save(transaction);
+			reqHandler.throwIf(result => !result, 500, 'Internal server error', 'something went wrong couldnt save data')
 		} catch (err) {
 			let errorObj = err.status && err.errorType ? err : {status:500,errorType:"sequelize error",errorMsg:err}; //if errorObj is already formed then use it
 			return Promise.reject(errorObj);
@@ -108,8 +107,7 @@ class BaseController {
 				.update(data, {
 					where: options,
 				})
-			let updatedRecord = reqHandler.throwIf(result => !result, 500, 'Internal server error', 'something went wrong couldnt update data')
-			//return Promise.resolve(updatedRecord)
+			reqHandler.throwIf(result => !result, 500, 'Internal server error', 'something went wrong couldnt update data')
 		} catch (err) {
 			let errorObj = err.status && err.errorType ? err : {status:500,errorType:"sequelize error",errorMsg:err}; //if errorObj is already formed then use it
 			return Promise.reject(errorObj);
