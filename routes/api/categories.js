@@ -18,7 +18,43 @@ const {verifyUserIsAdmin} = require("../../middleware/validateToken");
    *       data:
    *         type: array
    */
-
+/**
+  * @swagger
+  * /categories/upload:
+  *   post:
+  *     tags:
+  *       - Categories
+  *     security:
+  *       - Bearer: []
+  *     consumes:
+  *       - multipart/form-data
+  *     produces:
+  *       - application/json
+  *     parameters:
+  *     - name: file
+  *       in: formData
+  *       type: file
+  *       description: Category image upload
+  *       required: true
+  *     - name: title
+  *       in: formData
+  *       type: string
+  *       description: Category Title
+  *       required: true
+  *     - name: desc
+  *       in: formData
+  *       type: string
+  *       description: Category detailed description
+  *       required: false
+  *     - name: name
+  *       in: formData
+  *       type: string
+  *       description: Category name
+  *       required: false
+  *     responses:
+  *       200:
+  *         description: New category created
+  */
 
 router.post("/upload",verifyUserIsAdmin, cc.upload.bind(cc), cc.insertToDbAfterUpload.bind(cc));
 
