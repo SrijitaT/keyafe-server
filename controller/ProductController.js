@@ -68,7 +68,7 @@ class ProductController extends BaseController{
       const categories = await super.getAllByCustomOptions(req,"Categories",options);
       const cat_id = super.getDataValueFromSequelizeRes(categories)[0].id;
       const pOptions = {where:{cat_id}}
-      const prod = await super.getAllByCustomOptions(req,"Product",pOptions)
+      const prod = await super.getList(req,"Product",pOptions); //pagination of results
       reqHandler.sendSuccess(res)(prod);
      }catch(err){
       reqHandler.sendError(req,res,err);

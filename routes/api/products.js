@@ -116,6 +116,12 @@ router.post("/upload",verifyUserIsAdmin, pc.upload.bind(pc),pc.insertToDbAfterUp
  *        in: path
  *        required: true
  *        type: string
+ *      - in: query
+ *        name: page
+ *        required: true
+ *        schema:
+ *           type: integer
+ *        description: The number of items to skip before starting to collect the result set
  *     responses:
  *       200:
  *         description: Retrieved all Products of a particular category
