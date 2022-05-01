@@ -7,10 +7,10 @@ class ShapeController extends BaseController{
     super();
   }
   async getAllShapes(req,res){
-    const options = null;
+    const options =  {attributes:["id","name"]};;
     try{
       let shape = await super.getAllByCustomOptions(req,"Shape",options);
-      shape = super.getActualObjFromSequelizeRes(shape);
+      shape = super.getDataValueFromSequelizeRes(shape);
       reqHandler.sendSuccess(res)(shape);
     }catch(err){
       reqHandler.sendError(req,res,err);

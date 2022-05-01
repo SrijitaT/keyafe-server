@@ -10,7 +10,7 @@ class FlavourController extends BaseController{
     const options = {attributes:['id','variety','desc']};
     try{
       let flavour = await super.getAllByCustomOptions(req,"Flavour",options);
-      flavour = super.getActualObjFromSequelizeRes(flavour);
+      flavour = super.getDataValueFromSequelizeRes(flavour);
       reqHandler.sendSuccess(res)(flavour);
     }catch(err){
       reqHandler.sendError(req,res,err);

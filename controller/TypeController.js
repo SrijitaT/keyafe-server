@@ -7,10 +7,10 @@ class TypeController extends BaseController{
     super();
   }
   async getAllTypes(req,res){
-    const options = null;
+    const options = {attributes:["id","name"]};
     try{
       let type = await super.getAllByCustomOptions(req,"Type",options);
-      type = super.getActualObjFromSequelizeRes(type);
+      type = super.getDataValueFromSequelizeRes(type); 
       reqHandler.sendSuccess(res)(type);
     }catch(err){
       reqHandler.sendError(req,res,err);

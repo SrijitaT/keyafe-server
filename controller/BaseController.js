@@ -6,7 +6,7 @@ class BaseController {
         this.limit = 20;
 		this.options = options;
     }
-	getActualObjFromSequelizeRes(seq_res){
+	getDataValueFromSequelizeRes(seq_res){
 		if(Array.isArray(seq_res)){
 			return seq_res.map(s=>{
 				return s.dataValues
@@ -40,7 +40,10 @@ class BaseController {
 	async getAllByCustomOptions(req,modelName,options){
         let result;
 		try {
-			result = await req.app.get('db')[modelName].findAll(options);
+			if(options)
+				result = await req.app.get('db')[modelName].findAll(options);
+			else
+				result = await req.app.get('db')[modelName].findAll();
 		} catch (err) {
 			return Promise.reject(err);
 		}

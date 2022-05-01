@@ -65,7 +65,7 @@ class UserController extends BaseController{
         }
     
     const isMatch = await current_user.isValidPassword(req.body.password);
-    current_user = super.getActualObjFromSequelizeRes(current_user);
+    current_user = super.getDataValueFromSequelizeRes(current_user);
     if (isMatch) {
         //User Matched
         let payload = {...current_user}; //Create JWT payload
@@ -97,4 +97,4 @@ catch (err) {
 
 
 
-module.exports = UserController
+module.exports = new UserController()

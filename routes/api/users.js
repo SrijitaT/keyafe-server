@@ -1,7 +1,6 @@
 const express = require("express");
 const router = express.Router();
-const UserController = require("../../controller/UserController");
-const uc = new UserController();
+const uc = require("../../controller/UserController");
 /**
   * @swagger
   * /users/register:

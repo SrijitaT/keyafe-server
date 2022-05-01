@@ -1,7 +1,6 @@
 const jwt = require("jsonwebtoken");
 const {auth} = require("../config/app.config");
-const UC = require("../controller/UserController");
-const uc = new UC();
+const uc = require("../controller/UserController");
 
 let validateToken = (req,res,next) => {
     let tokenValue = req.headers["authorization"];

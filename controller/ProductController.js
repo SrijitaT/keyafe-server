@@ -44,7 +44,7 @@ class ProductController extends BaseController{
       const result = await sequelize.transaction(async (t) => {
       const prod_det = await this.create(req,'ProductDetails',{ desc,unit_price,qty,weight,currency,
           qty_measure,unit},{transaction:t})
-      const prod_det_id = super.getActualObjFromSequelizeRes(prod_det).id;
+      const prod_det_id = super.getDataValueFromSequelizeRes(prod_det).id;
         const productObj = { id:uuidv4(),title,cat_id,type_id,prod_det_id:prod_det_id,img_url,shape_id,original_flavour_id }
         const prod = await this.create(req,'Product',productObj,{transaction:t})
         return prod;
@@ -66,7 +66,7 @@ class ProductController extends BaseController{
     try{
       const options = {where:{name:req.params.category_name},attributes:["id","name"]};
       const categories = await super.getAllByCustomOptions(req,"Categories",options);
-      const cat_id = super.getActualObjFromSequelizeRes(categories)[0].id;
+      const cat_id = super.getDataValueFromSequelizeRes(categories)[0].id;
       const pOptions = {where:{cat_id}}
       const prod = await super.getAllByCustomOptions(req,"Product",pOptions)
       reqHandler.sendSuccess(res)(prod);
