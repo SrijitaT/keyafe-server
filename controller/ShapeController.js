@@ -7,7 +7,6 @@ class ShapeController extends BaseController{
     super();
   }
   async getAllShapes(req,res){
-    //const options =  {attributes:["id","name"]};
     const options =  {attributes:{exclude:["shape_id"]}}; //TODO: find alternative.somehow getting added by sequelize associations
     try{
       let shape = await super.getAllByCustomOptions(req,"Shape",options);

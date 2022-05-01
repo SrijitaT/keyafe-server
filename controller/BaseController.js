@@ -18,7 +18,6 @@ class BaseController {
         const reqParam = req?req.params.id:id;
 		let result;
 		try {
-			console.log("reqParam=",reqParam," modelName =",modelName);
 			result = await req.app.get('db')[modelName].findByPk(reqParam);
 			reqHandler.throwIf(result => !result, 404, 'not found', 'Resource not found');
 		} catch (err) {
