@@ -2,7 +2,8 @@ const imageFilter = require("../helpers/validation/image");
 const UploadUsingMulter = require("../helpers/utils/UploadUsingMulter");
 const BaseController = require("./BaseController");
 const reqHandler = require("../helpers/utils/RequestHandler");
-
+const { sequelize } = require("../models");
+const {v4: uuidv4} = require('uuid');
 
 class ProductController extends BaseController{
   constructor(){
@@ -41,12 +42,12 @@ class ProductController extends BaseController{
       let { title,desc,cat_id,type_id,unit_price,qty,weight,shape_id,original_flavour_id,currency,qty_measure,unit } = req.body;
       const img_url = this.getMediaHostPath(req);
       const result = await sequelize.transaction(async (t) => {
-        const prod_det = await this.create(req,'ProductDetails',{ desc,unit_price,qty,weight,currency,
+      const prod_det = await this.create(req,'ProductDetails',{ desc,unit_price,qty,weight,currency,
           qty_measure,unit},{transaction:t})
-        const prod = await this.create(req,'Product',{ title,cat_id,type_id,unit_price,qty,weight,prod_det_id:prod_det.id,img_url,shape_id,original_flavour_id },{transaction:t})
-        
+      const prod_det_id = super.getActualObjFromSequelizeRes(prod_det).id;
+        const productObj = { id:uuidv4(),title,cat_id,type_id,prod_det_id:prod_det_id,img_url,shape_id,original_flavour_id }
+        const prod = await this.create(req,'Product',productObj,{transaction:t})
         return prod;
-    
       });
     
       // If the execution reaches this line, the transaction has been committed successfully
@@ -64,10 +65,10 @@ class ProductController extends BaseController{
   async getProductsByCategory(req,res){
     try{
       const options = {where:{name:req.params.category_name},attributes:["id","name"]};
-      let categories = await super.getAllByCustomOptions(req,"Categories",options);
-      let cat_id = super.getActualObjFromSequelizeRes(categories).id;
+      const categories = await super.getAllByCustomOptions(req,"Categories",options);
+      const cat_id = super.getActualObjFromSequelizeRes(categories)[0].id;
       const pOptions = {where:{cat_id}}
-      let prod = await super.getAllByCustomOptions(req,"Product",pOptions)
+      const prod = await super.getAllByCustomOptions(req,"Product",pOptions)
       reqHandler.sendSuccess(res)(prod);
      }catch(err){
       reqHandler.sendError(req,res,err);

@@ -41,8 +41,6 @@ class BaseController {
         let result;
 		try {
 			result = await req.app.get('db')[modelName].findAll(options);
-			//console.log("result===",result);
-			//return Promise.resolve(result)
 		} catch (err) {
 			return Promise.reject(err);
 		}
