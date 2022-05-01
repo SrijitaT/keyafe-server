@@ -15,8 +15,9 @@ let categoriesRouter = require('./routes/api/categories');
 let flavoursRouter = require("./routes/api/flavours");
 let shapesRouter = require("./routes/api/shape");
 let typeRouter = require("./routes/api/type");
+let productDetailsRouter = require("./routes/api/productDetails");
 
-var app = express();
+const app = express();
 
 let clientUrl = "http://localhost:3000";
 // view engine setup
@@ -51,6 +52,7 @@ app.use('/api/categories', categoriesRouter);
 app.use('/api/flavours', flavoursRouter);
 app.use('/api/shapes', shapesRouter);
 app.use('/api/types',typeRouter);
+app.use('/api/product_details',productDetailsRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

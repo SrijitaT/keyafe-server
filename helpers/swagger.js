@@ -10,7 +10,9 @@ const path = require('path');
 const _ = require('lodash');
 const config = require('../config/app.config.js');
 
-const paths=['./routes/api/users.js','./routes/api/categories.js','./routes/api/products.js','./routes/api/shape.js','./routes/api/type.js','./routes/api/flavours.js']
+const paths=['./routes/api/users.js','./routes/api/categories.js',
+'./routes/api/products.js','./routes/api/shape.js','./routes/api/type.js',
+'./routes/api/flavours.js','./routes/api/productDetails.js']
 const options = {
 	swaggerDefinition: {
 		info: {
@@ -33,6 +35,10 @@ const options = {
 			{
 				name: 'Products',
 				description: 'for retrieving, adding,removing and updating products',
+			},
+			{
+				name: 'Product Details',
+				description: 'for retrieving, adding,removing and updating product details',
 			},
 			{
 				name: 'Types',

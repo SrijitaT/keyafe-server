@@ -7,7 +7,8 @@ class ShapeController extends BaseController{
     super();
   }
   async getAllShapes(req,res){
-    const options =  {attributes:["id","name"]};;
+    //const options =  {attributes:["id","name"]};
+    const options =  {attributes:{exclude:["shape_id"]}}; //TODO: find alternative.somehow getting added by sequelize associations
     try{
       let shape = await super.getAllByCustomOptions(req,"Shape",options);
       shape = super.getDataValueFromSequelizeRes(shape);
@@ -17,9 +18,9 @@ class ShapeController extends BaseController{
     }
   }
   async addNewShape(req,res){
-    let {name,desc} = req.body;
+    const {name,desc} = req.body;
     try{
-      let result = await this.create(req, 'Shape', { name,desc });
+      const result = await this.create(req, 'Shape', { name,desc });
       reqHandler.sendSuccess(res, 'Shape created successfully')(result);
     }catch(err){
       reqHandler.sendError(req,res,err);

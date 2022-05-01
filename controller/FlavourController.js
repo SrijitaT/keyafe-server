@@ -7,7 +7,8 @@ class FlavourController extends BaseController{
     super();
   }
   async getAllFlavours(req,res){
-    const options = {attributes:['id','variety','desc']};
+    //const options = {attributes:['id','variety','desc']};
+    const options =  {attributes:{exclude:["flavour_id"]}}; //TODO: find alternative.somehow getting added by sequelize associations
     try{
       let flavour = await super.getAllByCustomOptions(req,"Flavour",options);
       flavour = super.getDataValueFromSequelizeRes(flavour);

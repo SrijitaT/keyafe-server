@@ -18,7 +18,9 @@ module.exports = (sequelize, DataTypes) => {
     qty: DataTypes.STRING,
     unit_price: DataTypes.INTEGER,
     weight: DataTypes.INTEGER,
-    currency: DataTypes.INTEGER
+    currency: DataTypes.INTEGER,
+    qty_measure: DataTypes.STRING,
+    unit: DataTypes.STRING
   }, {
     sequelize,
     modelName: 'ProductDetails',
