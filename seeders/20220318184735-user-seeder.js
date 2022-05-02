@@ -11,13 +11,8 @@ module.exports = {
         username: 'srijita',
         phone:'9339072217',
         email_id:'srijita.thakur@gmail.com',
-        address:'21 Banku Behari Ghosh lane Belurmath-Howrah',
         gender:"Female",
         password:password1,
-        pincode:'711202',
-        country:'India',
-        state:'West Bengal',
-        city:'Kolkata',
         isRegistered:true,
         role:'admin'
      },
@@ -26,27 +21,18 @@ module.exports = {
       username: 'test',
       phone:'9439072257',
       email_id:'test@gmail.com',
-      address:'95 xyz GT road',
       gender:"Male",
       password:password2,
-      pincode:'700202',
-      country:'India',
-      state:'West Bengal',
-      city:'Kolkata',
-      isRegistered:true
+      isRegistered:true,
+      role:'customer'
    },
    {
     name: 'Chandan Bose',
     username: 'chandan',
     phone:'9674979475',
     email_id:'bosechandan21@gmail.com',
-    address:'246/180 Sahid Ganesh Dutta Road Ramkrishna Pally Birati',
     gender:"Male",
     password:password3,
-    pincode:'700051',
-    country:'India',
-    state:'West Bengal',
-    city:'Kolkata',
     isRegistered:true,
     role:'admin'
  }], {});

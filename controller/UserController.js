@@ -1,6 +1,5 @@
 const jwt = require("jsonwebtoken");
 const {auth} = require("../config/app.config");
-const moment = require("moment");
 const Joi = require('joi');
 
 const BaseController = require("./BaseController");
@@ -17,7 +16,7 @@ class UserController extends BaseController{
         const user = await this.getById(req,'User',id)
         return user.dataValues.role;
     }catch(err){
-          console.log("caught err in getUserRole ",err)
+        console.log("caught err in getUserRole ",err)
     }
   }
   async registerUser(req,res){
@@ -37,10 +36,11 @@ class UserController extends BaseController{
 			const { error } = schema.validate(data);
 			reqHandler.validateJoi(error, 400, 'bad Request', error ? error.message : '');
             
-            let result = super.create(req,'User',data);
-            reqHandler.sendSuccess(res,"User registered successfully!",201)(result);
-    }catch(err){
-                reqHandler.sendError(req,res,err);
+            const result = await super.create(req,'User',data);
+            const {password,isRegistered,role,...rest} = super.getDataValueFromSequelizeRes(result);
+            reqHandler.sendSuccess(res,"User registered successfully!",201)(rest);
+    } catch(err){
+            reqHandler.sendError(req,res,err);
     }
 
   }
@@ -86,15 +86,10 @@ class UserController extends BaseController{
     } else {
         reqHandler.sendError(req,res,{"msg":"Password Incorrect!",status:400});
     }
-}
-catch (err) {
-    reqHandler.sendError(req,res,err)
-}
   }
-  
+  catch (err) {
+    reqHandler.sendError(req,res,err)
+  }
+} 
 }
-
-
-
-
 module.exports = new UserController()

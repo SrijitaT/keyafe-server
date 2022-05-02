@@ -47,7 +47,6 @@ module.exports = (sequelize, DataTypes) => {
         }
       }
     },
-    address: DataTypes.STRING,
     gender: {
       type: DataTypes.STRING,
       validate:{
@@ -58,22 +57,9 @@ module.exports = (sequelize, DataTypes) => {
       }
     },
     password: DataTypes.STRING,
-    pincode: DataTypes.INTEGER,
     birthday:DataTypes.DATE,
-    country : {
-      type : DataTypes.STRING,
-      default: "India"
-    },
-    state : {
-      type : DataTypes.STRING,
-      default: "West Bengal"
-    },
-    city : {
-      type:DataTypes.STRING,
-      default: "Kolkata"
-    },
-    isRegistered: {type : DataTypes.BOOLEAN, default : true},
-    role: {type : DataTypes.STRING, default : "customer"}
+    isRegistered: {type : DataTypes.BOOLEAN, defaultValue : true},
+    role: {type : DataTypes.STRING, defaultValue : "customer"}
   }, {
     sequelize,
     modelName: 'User',

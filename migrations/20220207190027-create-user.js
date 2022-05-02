@@ -9,23 +9,23 @@ module.exports = {
         type: Sequelize.INTEGER
       },
       name: {
-        type: Sequelize.STRING
+        type: Sequelize.STRING,
+        allowNull:false
       },
       username: {
         type: Sequelize.STRING
       },
       phone: {
-        type: Sequelize.STRING
+        type: Sequelize.STRING,
+        allowNull:false
       },
       email_id: {
         type: Sequelize.STRING,
         validate:{
           isEmail: true,
           notEmpty: true
-        }
-      },
-      address: {
-        type: Sequelize.STRING
+        },
+        allowNull:false
       },
       gender: {
         type: Sequelize.STRING,
@@ -34,26 +34,16 @@ module.exports = {
         }
       },
       password: {
-        type: Sequelize.STRING
-      },
-      pincode: {
-        type: Sequelize.INTEGER
-      },
-      country : {
-        type : Sequelize.STRING,
-        defaultValue: "India"
-      },
-      state : {
-        type : Sequelize.STRING,
-        defaultValue: "West Bengal"
-      },
-      city : {
-        type:Sequelize.STRING,
-        defaultValue: "Kolkata"
+        type: Sequelize.STRING,
+        allowNull:false
       },
       isRegistered: {type : Sequelize.BOOLEAN, defaultValue : true},
       birthday:{type: Sequelize.DATE},
-      role: {type : Sequelize.STRING, defaultValue : "customer"},
+      role: {
+              allowNull : false,
+              type : Sequelize.STRING,
+              defaultValue : "customer"
+      },
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE,

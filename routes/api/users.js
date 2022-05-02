@@ -1,6 +1,8 @@
 const express = require("express");
 const router = express.Router();
 const uc = require("../../controller/UserController");
+const uac = require("../../controller/UserAddressController");
+const {validateCurrentUser} = require("../../middleware/validateToken");
 /**
   * @swagger
   * /users/register:
@@ -30,17 +32,7 @@ const uc = require("../../controller/UserController");
   *             type: string
   *           phone:
   *             type: string
-  *           address:
-  *             type: string
-  *           pincode:
-  *             type: string
   *           gender:
-  *             type: string
-  *           country:
-  *             type: string
-  *           state:
-  *             type: string
-  *           city:
   *             type: string
   *           birthday:
   *             type: string
@@ -80,9 +72,74 @@ router.post("/register", uc.registerUser);
   */
 router.post("/login", uc.loginUser.bind(uc));
 
+/**
+  * @swagger
+  * /users/address:
+  *   post:
+  *     tags:
+  *       - Users
+  *     security:
+  *       - Bearer: []
+  *     produces:
+  *       - application/json
+  *     parameters:
+  *     - name: body
+  *       in: body
+  *       description: Add address
+  *       required: true
+  *       schema:
+  *         type: object
+  *         required:
+  *           - user_id
+  *           - address_line1
+  *           - pincode
+  *         properties:
+  *           user_id:
+  *             type: integer
+  *           phone:
+  *             type: string
+  *           address_line1:
+  *             type: string
+  *           address_line2:
+  *             type: string
+  *           pincode:
+  *             type: string
+  *           country:
+  *             type: string
+  *           state:
+  *             type: string
+  *           city:
+  *             type: string
+  *           isDefault:
+  *             type: boolean
+  *           address_type:
+  *             type: string
+  *     responses:
+  *       201:
+  *         description: Address added successfully!
+  */
 
-
-router.post("/address")
-router.get("/address")
+router.post("/address",validateCurrentUser,uac.add.bind(uac))
+/**
+ * @swagger
+ * /users/address/{user_id}:
+ *   get:
+ *     tags:
+ *       - Users
+ *     security:
+ *       - Bearer: []
+ *     produces:
+ *       - application/json
+ *     parameters:
+ *      - name: user_id
+ *        description: Get all addresses of the given user_id
+ *        in: path
+ *        required: true
+ *        type: integer
+ *     responses:
+ *       200:
+ *         description: Retrieved Productdetails of a particular product
+ */
+router.get("/address/:user_id",validateCurrentUser,uac.getAddressByUserId.bind(uac))
 
 module.exports = router;

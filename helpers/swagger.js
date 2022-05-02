@@ -29,6 +29,10 @@ const options = {
 				description: 'Authentication apis',
 			},
 			{
+				name: 'Users',
+				description: 'All apis related to user',
+			},
+			{
 				name: 'Categories',
 				description: 'for retrieving, adding,removing and updating categories',
 			},
