@@ -11,21 +11,22 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
-      this.hasOne(models.Categories,{foreignKey:'cat_id'})
-      this.hasOne(models.Type,{foreignKey:'type_id'})
-      this.hasOne(models.Shape,{foreignKey:'shape_id'})
-      this.hasOne(models.Flavour,{foreignKey:'original_flavour_id'})
-      this.hasOne(models.ProductDetails,{foreignKey:'prod_det_id'})
+      this.belongsTo(models.Categories,{foreignKey:'cat_id'})
+      this.belongsTo(models.Type,{foreignKey:'type_id'})
+      this.belongsTo(models.Shape,{foreignKey:'shape_id'})
+      this.belongsTo(models.Flavour,{foreignKey:'original_flavour_id'})
+      this.belongsTo(models.ProductDetails,{foreignKey:'prod_det_id'})
     }
   }
   Product.init({
+    id: {
+      allowNull: false,
+      primaryKey: true,
+      type: DataTypes.UUID,
+      defaultValue:DataTypes.UUIDV4
+    },
     title: DataTypes.STRING,
-    cat_id: DataTypes.INTEGER,
-    type_id: DataTypes.INTEGER,
-    img_url: DataTypes.STRING,
-    shape_id: DataTypes.INTEGER,
-    original_flavour_id: DataTypes.INTEGER,
-    prod_det_id:DataTypes.INTEGER
+    img_url: DataTypes.STRING,//all foreign keys are added by associations
   }, {
     sequelize,
     modelName: 'Product',

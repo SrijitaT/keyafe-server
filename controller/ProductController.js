@@ -64,7 +64,7 @@ class ProductController extends BaseController{
 
   async getProductsByCategory(req,res){
     try{
-      const options = {where:{name:req.params.category_name},attributes:["id","name"]};
+      const options = {where:{name:req.params.category_name}};
       const categories = await super.getAllByCustomOptions(req,"Categories",options);
       const cat_id = super.getDataValueFromSequelizeRes(categories)[0].id;
       const pOptions = {where:{cat_id}}

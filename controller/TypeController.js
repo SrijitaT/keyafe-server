@@ -7,9 +7,8 @@ class TypeController extends BaseController{
     super();
   }
   async getAllTypes(req,res){
-    //const options = {attributes:["id","name"]};
-    const options =  {attributes:{exclude:["type_id"]}}; //TODO: find alternative.somehow getting added by sequelize associations.
     try{
+      const options = null;
       let type = await super.getAllByCustomOptions(req,"Type",options);
       type = super.getDataValueFromSequelizeRes(type); 
       reqHandler.sendSuccess(res)(type);

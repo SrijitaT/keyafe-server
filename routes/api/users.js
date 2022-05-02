@@ -82,4 +82,7 @@ router.post("/login", uc.loginUser.bind(uc));
 
 
 
+router.post("/address")
+router.get("/address")
+
 module.exports = router;

@@ -14,6 +14,7 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
+      this.hasMany(models.UserAddress,{foreignKey:'user_id'})
     }
     async isValidPassword(password) {
       const user = this;

@@ -49,7 +49,8 @@ class CategoriesController extends BaseController{
 
   async getAllCategories(req,res){
     try{
-      const options = {attributes:["id","title","name","img_url","desc"]};
+      //const options = {attributes:["id","title","name","img_url","desc"]};
+      const options = null;
       let categories = await super.getAllByCustomOptions(req,"Categories",options);
       categories = super.getDataValueFromSequelizeRes(categories);
       reqHandler.sendSuccess(res)(categories);
