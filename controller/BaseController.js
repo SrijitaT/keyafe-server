@@ -27,7 +27,6 @@ class BaseController {
 		return result;
     }
     async getByCustomOptions(req,modelName,options){
-		console.log("in getByCustom")
         let result;
 		try {
 			result = await req.app.get('db')[modelName].findOne(options);
@@ -80,8 +79,9 @@ class BaseController {
 		}
 		return result;
     }
-    async updateById(req,modelName,data){
-        const recordID = req.params.id;
+    async updateById(req,modelName,data,key){
+        const recordID = req.params[key ? key : 'id'];
+		console.log("recordId===",req.params);
 		let result;
 
 		try {

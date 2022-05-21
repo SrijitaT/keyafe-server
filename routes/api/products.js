@@ -130,6 +130,46 @@ router.post("/upload",verifyUserIsAdmin, pc.upload.bind(pc),pc.insertToDbAfterUp
  */
 
 router.get("/:category_name",pc.getProductsByCategory.bind(pc))
+/**
+ * @swagger
+ * /products/{prod_id}:
+ *   put:
+ *     tags:
+ *       - Products
+ *     security:
+ *       - Bearer: []
+ *     produces:
+ *       - application/json
+ *     parameters:
+ *      - name: prod_id
+ *        description: category name to get list of all products under that category
+ *        in: path
+ *        required: true
+ *        type: string
+ *      - in: body
+ *        name: body
+ *        required: true
+ *        schema:
+ *           type: object
+ *        properties:
+ *           title:
+ *             type: string
+ *           cat_id: 
+ *             type: integer
+ *           type_id:
+ *             type: integer
+ *           prod_det_id: 
+ *             type: integer
+ *           shape_id:
+ *             type: integer
+ *           original_flavour_id: 
+ *             type: integer
+ *           img_url:
+ *             type: string
+ *     responses:
+ *       200:
+ *         description: Updated product
+ */
 
-
+router.put("/:prod_id",verifyUserIsAdmin,pc.updateProduct.bind(pc))
 module.exports = router;
