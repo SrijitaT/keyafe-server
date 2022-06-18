@@ -15,7 +15,7 @@ class BaseController {
 		return seq_res.dataValues;
 	}
     async getById(req,modelName,id){
-        const reqParam = req?req.params.id:id;
+        const reqParam = req ? req.params.id : id;
 		let result;
 		try {
 			result = await req.app.get('db')[modelName].findByPk(reqParam);

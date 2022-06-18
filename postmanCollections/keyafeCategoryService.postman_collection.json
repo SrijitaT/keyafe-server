@@ -1,0 +1,81 @@
+{
+	"info": {
+		"_postman_id": "8ec5fa51-2f15-482f-adb6-296abda16048",
+		"name": "keyafeCategoryService",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "http://localhost:5000/api/categories",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:5000/api/categories",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"api",
+						"categories"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:5000/api/categories/upload",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwibmFtZSI6InNyaWppdGEiLCJlbWFpbF9pZCI6InNyaWppdGEudGhha3VyQGdtYWlsLmNvbSIsImlhdCI6MTY1MTI1MDUyMSwiZXhwIjoxNjUxMjU0MTIxfQ.-KXg3FOAexNIeF2FydTswepMH3KX9BQFuLAVFXWIkyE",
+						"type": "default"
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "title",
+							"value": "gifts",
+							"type": "default"
+						},
+						{
+							"key": "img_url",
+							"type": "file",
+							"src": "gifts.jpeg"
+						},
+						{
+							"key": "desc",
+							"value": "gifts",
+							"type": "default"
+						},
+						{
+							"key": "name",
+							"value": "gifts",
+							"type": "default"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost:5000/api/categories/upload",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"api",
+						"categories",
+						"upload"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

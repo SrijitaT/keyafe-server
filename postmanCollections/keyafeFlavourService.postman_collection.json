@@ -1,0 +1,29 @@
+{
+	"info": {
+		"_postman_id": "f7529ed7-deca-4037-b0d3-de4bd1a8272a",
+		"name": "keyafeFlavourService",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "http://localhost:5000/api/flavours",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:5000/api/flavours",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"api",
+						"flavours"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

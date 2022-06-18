@@ -1,25 +1,28 @@
-var createError = require('http-errors');
-var express = require('express');
-var path = require('path');
-var cookieParser = require('cookie-parser');
-var logger = require('morgan');
-let cookieSession = require('cookie-session');
-let passport = require("passport");
-let cors = require("cors");
+const createError = require('http-errors');
+const express = require('express');
+const path = require('path');
+const cookieParser = require('cookie-parser');
+const logger = require('morgan');
+const cookieSession = require('cookie-session');
+const passport = require("passport");
+const cors = require("cors");
 const swagger = require('./helpers/swagger');
 
-var indexRouter = require('./routes/api/index');
-var usersRouter = require('./routes/api/users');
-var productsRouter = require('./routes/api/products');
-let categoriesRouter = require('./routes/api/categories');
-let flavoursRouter = require("./routes/api/flavours");
-let shapesRouter = require("./routes/api/shape");
-let typeRouter = require("./routes/api/type");
-let productDetailsRouter = require("./routes/api/productDetails");
+const indexRouter = require('./routes/api/index');
+const usersRouter = require('./routes/api/users');
+const productsRouter = require('./routes/api/products');
+const categoriesRouter = require('./routes/api/categories');
+const flavoursRouter = require("./routes/api/flavours");
+const shapesRouter = require("./routes/api/shape");
+const typeRouter = require("./routes/api/type");
+const productDetailsRouter = require("./routes/api/productDetails");
+const cartRouter = require("./routes/api/cart");
+const deliveryTimeSlotRouter = require("./routes/api/deliverytimeslot");
+const deliveryTypeRouter = require("./routes/api/deliveryType");
 
 const app = express();
 
-let clientUrl = "http://localhost:3000";
+const clientUrl = "http://localhost:3000";
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
@@ -33,7 +36,7 @@ app.use(express.json());
 
 
 app.use(cookieParser());
-app.use(cookieSession({name:"session",keys:["srijita"],maxAge:24*60*60*100}));
+app.use(cookieSession({name:"session", keys:["srijita"], maxAge:24*60*60*100}));
 app.use(passport.initialize())
 app.use(passport.session())
 app.use(express.static(path.join(__dirname, 'public')));
@@ -53,6 +56,9 @@ app.use('/api/flavours', flavoursRouter);
 app.use('/api/shapes', shapesRouter);
 app.use('/api/types',typeRouter);
 app.use('/api/product_details',productDetailsRouter);
+app.use("/api/carts",cartRouter);
+app.use("/api/delivery_time_slots",deliveryTimeSlotRouter);
+app.use("/api/delivery_types",deliveryTypeRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

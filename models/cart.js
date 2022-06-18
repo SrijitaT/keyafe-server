@@ -11,20 +11,21 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
+      this.belongsTo(models.Product,{foreignKey: "product_id"});
+      this.belongsTo(models.User,{foreignKey: "user_id"});
+      this.belongsTo(models.DeliveryType,{foreignKey: "delivery_type_id"});
+      this.belongsTo(models.DeliveryTimeSlot, {foreignKey: "delivery_time_slot_id"});
     }
   }
   Cart.init({
-    product_id: DataTypes.STRING,
-    user_id: DataTypes.INTEGER,
     quantity: DataTypes.INTEGER,
-    prod_price: DataTypes.INTEGER,
+    total_price: DataTypes.INTEGER,
     currency: DataTypes.STRING,
-    delivery_date: DataTypes.DATE,
-    delivery_type_id: DataTypes.INTEGER,
-    delivery_time_slot_id: DataTypes.INTEGER
+    delivery_date: DataTypes.DATE
   }, {
     sequelize,
     modelName: 'Cart',
+    freezeTableName: true
   });
   return Cart;
 };

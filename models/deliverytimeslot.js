@@ -11,12 +11,13 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
+      this.hasMany(models.Cart,{foreignKey: "delivery_time_slot_id"});
+      this.belongsTo(models.DeliveryType,{foreignKey: "delivery_type_id"});
     }
   }
   DeliveryTimeSlot.init({
     from: DataTypes.TIME,
     to: DataTypes.TIME,
-    delivery_type_id: DataTypes.INTEGER,
     time_format: DataTypes.STRING
   }, {
     sequelize,

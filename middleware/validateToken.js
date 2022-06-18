@@ -2,7 +2,7 @@ const jwt = require("jsonwebtoken");
 const {auth} = require("../config/app.config");
 const uc = require("../controller/UserController");
 
-let validateToken = (req,res,next) => {
+const validateToken = (req,res,next) => {
     let tokenValue = req.headers["authorization"];
     if(tokenValue){
         jwt.verify(tokenValue,auth.jwt_secret,(err,data) => {
@@ -21,7 +21,7 @@ const validateCurrentUser = (req,res,next) => {
     const tokenValue = req.headers["authorization"];
     if(tokenValue){
         jwt.verify(tokenValue,auth.jwt_secret,(err,data) => {
-            const user_id = req.body.user_id ? req.body.user_id:req.params.user_id;
+            const user_id = req.body.user_id ? req.body.user_id : req.params.user_id;
             if(err){
                 return res.status(500).json({status:-1,message:'Invalid Token'}) 
             }
@@ -37,7 +37,7 @@ const validateCurrentUser = (req,res,next) => {
         return res.status(400).json({status:0,message:'Token Needed'})
     }
 }
-let verifyUserIsAdmin = (req,res,next) => {
+const verifyUserIsAdmin = (req,res,next) => {
     try{
     let tokenValue = req.headers["authorization"];
     if(tokenValue){

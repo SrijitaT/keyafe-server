@@ -1,0 +1,121 @@
+{
+	"info": {
+		"_postman_id": "aa013d5c-1f8f-4265-87f5-a13b02b1ebd8",
+		"name": "keyafeProductService",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "http://localhost:5000/api/products/Celebration cakes",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:5000/api/products/Celebration cakes",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"api",
+						"products",
+						"Celebration cakes"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:5000/api/products/upload",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "file",
+							"type": "file",
+							"src": "IMG_20210613_010658-01.jpeg"
+						},
+						{
+							"key": "title",
+							"value": "One cake",
+							"type": "default"
+						},
+						{
+							"key": "desc",
+							"value": "Cake for first birthday",
+							"type": "default"
+						},
+						{
+							"key": "cat_id",
+							"value": "1",
+							"type": "default"
+						},
+						{
+							"key": "type_id",
+							"value": "3",
+							"type": "default"
+						},
+						{
+							"key": "unit_price",
+							"value": "650",
+							"type": "default"
+						},
+						{
+							"key": "qty",
+							"value": "1",
+							"type": "default"
+						},
+						{
+							"key": "weight",
+							"value": "500",
+							"type": "default"
+						},
+						{
+							"key": "shape_id",
+							"value": "1",
+							"type": "default"
+						},
+						{
+							"key": "original_flavour_id",
+							"value": "1",
+							"type": "default"
+						},
+						{
+							"key": "currency",
+							"value": "Rs",
+							"type": "default"
+						},
+						{
+							"key": "qty_measure",
+							"value": "piece",
+							"type": "default"
+						},
+						{
+							"key": "unit",
+							"value": "gm",
+							"type": "default"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost:5000/api/products/upload",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"api",
+						"products",
+						"upload"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

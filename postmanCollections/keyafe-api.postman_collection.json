@@ -1,0 +1,320 @@
+{
+	"info": {
+		"_postman_id": "6b65ca11-8d4a-4a70-9c1e-dcc727c66938",
+		"name": "keyafe-api",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "userService",
+			"item": [
+				{
+					"name": "http://localhost:5000/login",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "email_id",
+									"value": "srijita.thakur@gmail.com",
+									"type": "default"
+								},
+								{
+									"key": "password",
+									"value": "srijita123",
+									"type": "default"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:5000/api/users/login",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"users",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "http://localhost:5000/api/users/register",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "email_id",
+									"value": "s123@gmail.com",
+									"type": "default"
+								},
+								{
+									"key": "name",
+									"value": "sam",
+									"type": "default"
+								},
+								{
+									"key": "username",
+									"value": "sam67",
+									"type": "default"
+								},
+								{
+									"key": "phone",
+									"value": "9887053321",
+									"type": "default"
+								},
+								{
+									"key": "password",
+									"value": "s@123",
+									"type": "default"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:5000/api/users/register",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"users",
+								"register"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "categoryService",
+			"item": [
+				{
+					"name": "http://localhost:5000/api/categories",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:5000/api/categories",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"categories"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "http://localhost:5000/api/categories/upload",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwibmFtZSI6InNyaWppdGEiLCJlbWFpbF9pZCI6InNyaWppdGEudGhha3VyQGdtYWlsLmNvbSIsImlhdCI6MTY1MTI1MDUyMSwiZXhwIjoxNjUxMjU0MTIxfQ.-KXg3FOAexNIeF2FydTswepMH3KX9BQFuLAVFXWIkyE",
+								"type": "default"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "title",
+									"value": "gifts",
+									"type": "default"
+								},
+								{
+									"key": "img_url",
+									"type": "file",
+									"src": "gifts.jpeg"
+								},
+								{
+									"key": "desc",
+									"value": "gifts",
+									"type": "default"
+								},
+								{
+									"key": "name",
+									"value": "gifts",
+									"type": "default"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:5000/api/categories/upload",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"categories",
+								"upload"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "productService",
+			"item": [
+				{
+					"name": "http://localhost:5000/api/products/upload",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "file",
+									"type": "file",
+									"src": "IMG_20210613_010658-01.jpeg"
+								},
+								{
+									"key": "title",
+									"value": "One cake",
+									"type": "default"
+								},
+								{
+									"key": "desc",
+									"value": "Cake for first birthday",
+									"type": "default"
+								},
+								{
+									"key": "cat_id",
+									"value": "1",
+									"type": "default"
+								},
+								{
+									"key": "type_id",
+									"value": "3",
+									"type": "default"
+								},
+								{
+									"key": "unit_price",
+									"value": "650",
+									"type": "default"
+								},
+								{
+									"key": "qty",
+									"value": "1",
+									"type": "default"
+								},
+								{
+									"key": "weight",
+									"value": "500",
+									"type": "default"
+								},
+								{
+									"key": "shape_id",
+									"value": "1",
+									"type": "default"
+								},
+								{
+									"key": "original_flavour_id",
+									"value": "1",
+									"type": "default"
+								},
+								{
+									"key": "currency",
+									"value": "Rs",
+									"type": "default"
+								},
+								{
+									"key": "qty_measure",
+									"value": "piece",
+									"type": "default"
+								},
+								{
+									"key": "unit",
+									"value": "gm",
+									"type": "default"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:5000/api/products/upload",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"products",
+								"upload"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "http://localhost:5000/api/products/Celebration cakes",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:5000/api/products/Celebration cakes",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"products",
+								"Celebration cakes"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "flavourService",
+			"item": [
+				{
+					"name": "http://localhost:5000/api/flavours",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:5000/api/flavours",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"flavours"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}

@@ -1,7 +1,5 @@
 'use strict';
-const {
-  Model
-} = require('sequelize');
+const {Model} = require('sequelize');
 module.exports = (sequelize, DataTypes) => {
   class OrderDetails extends Model {
     /**
@@ -17,8 +15,24 @@ module.exports = (sequelize, DataTypes) => {
     user_id: DataTypes.STRING,
     total: DataTypes.INTEGER,
     currency: DataTypes.STRING,
-    payment_id: DataTypes.STRING,
-    address_id:DataTypes.INTEGER
+    //payment_id: DataTypes.STRING, //will add later
+    address_id: DataTypes.INTEGER,
+    source: {
+      type: DataTypes.ENUM("website","admin","others"),
+      defaultValue: "website"
+    },
+    taken_by: {
+      type:DataTypes.INTEGER,
+      allowNull:true
+    }, //if its taken by any admin
+    reference_name: {
+      type:DataTypes.STRING,
+      allowNull:true
+    },
+    reference_relation: {
+      type:DataTypes.STRING,
+      allowNull:true
+    }
   }, {
     sequelize,
     modelName: 'OrderDetails',

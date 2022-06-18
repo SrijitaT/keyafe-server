@@ -1,0 +1,28 @@
+{
+	"info": {
+		"_postman_id": "9c9897f3-89ef-4f59-8b5c-9b5f2c527563",
+		"name": "keyafeDeliveryTimeSlotService",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "{{hostname}}/api/delivery_time_slots/2",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{hostname}}/api/delivery_time_slots/2",
+					"host": [
+						"{{hostname}}"
+					],
+					"path": [
+						"api",
+						"delivery_time_slots",
+						"2"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

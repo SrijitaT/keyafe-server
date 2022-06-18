@@ -11,7 +11,8 @@ module.exports = {
       uid:{
         allowNull: false,
         unique: true,
-        type: Sequelize.UUID
+        type: Sequelize.UUID,
+        defaultValue: Sequelize.UUIDV4
       },
       user_id: {
         type: Sequelize.INTEGER,
@@ -27,10 +28,33 @@ module.exports = {
         type: Sequelize.INTEGER
       },
       currency: {
-        type: Sequelize.STRING
+        type: Sequelize.STRING,
+        defaultValue: "Rs"
       },
-      payment_id: {
+      /*payment_id: {
         type: Sequelize.STRING
+      },*/
+      source: {
+        type: Sequelize.ENUM("website","admin","others"),
+        defaultValue: "website"
+      },
+      taken_by: {
+        type: Sequelize.INTEGER,
+        allowNull: true,
+        references:{
+          model:{
+            tableName:"users"
+          },
+          key: "id"
+        }
+      }, //if its taken by any admin
+      reference_name: {
+        type: Sequelize.STRING,
+        allowNull: true
+      },
+      reference_relation: {
+        type: Sequelize.STRING,
+        allowNull: true
       },
       createdAt: {
         allowNull: false,

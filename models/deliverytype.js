@@ -11,6 +11,7 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
+      this.hasMany(models.Cart,{foreignKey: "delivery_type_id"});
     }
   }
   DeliveryType.init({

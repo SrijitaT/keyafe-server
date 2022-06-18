@@ -1,0 +1,29 @@
+{
+	"info": {
+		"_postman_id": "92f14a1b-6c17-43b5-90b5-47334710a117",
+		"name": "keyafeShapeService",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "http://localhost:5000/api/shapes",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:5000/api/shapes",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"api",
+						"shapes"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

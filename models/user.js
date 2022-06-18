@@ -14,7 +14,8 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
-      this.hasMany(models.UserAddress,{foreignKey:'user_id'})
+      this.hasMany(models.UserAddress,{foreignKey: 'user_id'})
+      this.hasMany(models.Cart,{foreignKey: 'user_id'});
     }
     async isValidPassword(password) {
       const user = this;
@@ -30,6 +31,12 @@ module.exports = (sequelize, DataTypes) => {
       autoIncrement: true,
       primaryKey: true,
       type: DataTypes.INTEGER
+    },
+    uid: {
+      allowNull: false,
+      unique: true,
+      type: DataTypes.UUID,
+      defaultValue: DataTypes.UUIDV4
     },
     name: DataTypes.STRING,
     username: DataTypes.STRING,
@@ -57,7 +64,7 @@ module.exports = (sequelize, DataTypes) => {
       }
     },
     password: DataTypes.STRING,
-    birthday:DataTypes.DATE,
+    birthday: DataTypes.DATE,
     isRegistered: {type : DataTypes.BOOLEAN, defaultValue : true},
     role: {type : DataTypes.STRING, defaultValue : "customer"}
   }, {
