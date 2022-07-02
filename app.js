@@ -36,7 +36,7 @@ app.use(express.json());
 
 
 app.use(cookieParser());
-app.use(cookieSession({name:"session", keys:["srijita"], maxAge:24*60*60*100}));
+app.use(cookieSession({ name:"session", keys:["srijita"], maxAge:24*60*60*100 }));
 app.use(passport.initialize())
 app.use(passport.session())
 app.use(express.static(path.join(__dirname, 'public')));
@@ -44,9 +44,9 @@ app.use(express.static(path.join(__dirname, 'public')));
 //app.use('/images', express.static(path.join(__dirname, 'public', 'images')))
 
 app.use(cors({
-  origin: clientUrl,
-  methods: "GET,PUT,POST,DELETE",
-  credentials: true
+	origin: clientUrl,
+	methods: "GET,PUT,POST,DELETE",
+	credentials: true
 }))
 app.use('/', indexRouter);
 app.use('/api/users', usersRouter);
@@ -54,26 +54,26 @@ app.use('/api/products', productsRouter);
 app.use('/api/categories', categoriesRouter);
 app.use('/api/flavours', flavoursRouter);
 app.use('/api/shapes', shapesRouter);
-app.use('/api/types',typeRouter);
-app.use('/api/product_details',productDetailsRouter);
-app.use("/api/carts",cartRouter);
-app.use("/api/delivery_time_slots",deliveryTimeSlotRouter);
-app.use("/api/delivery_types",deliveryTypeRouter);
+app.use('/api/types', typeRouter);
+app.use('/api/product_details', productDetailsRouter);
+app.use("/api/carts", cartRouter);
+app.use("/api/delivery_time_slots", deliveryTimeSlotRouter);
+app.use("/api/delivery_types", deliveryTypeRouter);
 
 // catch 404 and forward to error handler
-app.use(function(req, res, next) {
-  next(createError(404));
+app.use(function (req, res, next) {
+	next(createError(404));
 });
 
 // error handler
-app.use(function(err, req, res, next) {
-  // set locals, only providing error in development
-  res.locals.message = err.message;
-  res.locals.error = req.app.get('env') === 'development' ? err : {};
+app.use(function (err, req, res, next) {
+	// set locals, only providing error in development
+	res.locals.message = err.message;
+	res.locals.error = req.app.get('env') === 'development' ? err : {};
 
-  // render the error page
-  res.status(err.status || 500);
-  res.render('error');
+	// render the error page
+	res.status(err.status || 500);
+	res.render('error');
 });
 
 module.exports = app;

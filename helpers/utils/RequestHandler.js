@@ -1,32 +1,32 @@
 const _ = require('lodash');
-class RequestHandler{
-    constructor(){
-       /* if(!RequestHandler._instance){ //singleton
+class RequestHandler {
+	constructor () {
+		/* if(!RequestHandler._instance){ //singleton
             RequestHandler._instance = this;
         }
         return RequestHandler._instance;*/
-    }
-    throwIf(cb, status, errorType, errorMessage) {
+	}
+	throwIf (cb, status, errorType, errorMessage) {
 		return result => (cb(result) ? this.throwError(status, errorType, errorMessage)() : result);
 	}
 
-	validateJoi(err, status, errorType, errorMessage) {
+	validateJoi (err, status, errorType, errorMessage) {
 		//return !_.isNull(err) ? this.throwError(status, errorType, errorMessage)() : '';
 		return err ? this.throwError(status, errorType, errorMessage)() : '';
 	}
-    throwError(status,errorType,errorMsg){
-       // return (e) => {
-			let e = new Error(errorMsg || 'Default Error');
-			e.status = status;
-			e.errorType = errorType;
-			throw e;
+	throwError (status, errorType, errorMsg) {
+		// return (e) => {
+		let e = new Error(errorMsg || 'Default Error');
+		e.status = status;
+		e.errorType = errorType;
+		throw e;
 		//};
-    }
-    catchError(res, error) {
+	}
+	catchError (res, error) {
 		if (!error) error = new Error('Default error');
 		res.status(error.status || 500).json({ type: 'error', message: error.message || 'Unhandled error', error });
 	}
-    sendSuccess(res, message, status) {
+	sendSuccess (res, message, status) {
 		return (data, globalData) => {
 			if (_.isUndefined(status)) {
 				status = 200;
@@ -36,7 +36,7 @@ class RequestHandler{
 			});
 		};
 	}
-    sendError(req, res, error) {
+	sendError (req, res, error) {
 		return res.status(error.status || 500).json({
 			type: 'error', message: error.message || error.message || 'Unhandled Error', error,
 		});

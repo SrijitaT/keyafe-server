@@ -6,7 +6,7 @@ const { validateToken } = require("../../middleware/validateToken");
 
 
 
-router.post("/",validateToken, cc.addNewCartItem.bind(cc));
+router.post("/", validateToken, cc.addNewCartItem.bind(cc));
 
 
 router.patch("/:id", validateToken, cc.updateCartItem.bind(cc));

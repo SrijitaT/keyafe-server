@@ -1,7 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const pc = require("../../controller/ProductController");
-const {verifyUserIsAdmin} = require("../../middleware/validateToken");
+const { verifyUserIsAdmin } = require("../../middleware/validateToken");
 /**
    * @swagger
    * definitions:
@@ -100,7 +100,7 @@ const {verifyUserIsAdmin} = require("../../middleware/validateToken");
   *       200:
   *         description: New Product created
   */
-router.post("/upload",verifyUserIsAdmin, pc.upload.bind(pc),pc.insertToDbAfterUpload.bind(pc));
+router.post("/upload", verifyUserIsAdmin, pc.upload.bind(pc), pc.insertToDbAfterUpload.bind(pc));
 
 /**
  * @swagger
@@ -129,7 +129,7 @@ router.post("/upload",verifyUserIsAdmin, pc.upload.bind(pc),pc.insertToDbAfterUp
  *           $ref: '#/definitions/products'
  */
 
-router.get("/:category_name",pc.getProductsByCategory.bind(pc))
+router.get("/:category_name", pc.getProductsByCategory.bind(pc))
 /**
  * @swagger
  * /products/{prod_id}:
@@ -171,5 +171,5 @@ router.get("/:category_name",pc.getProductsByCategory.bind(pc))
  *         description: Updated product
  */
 
-router.put("/:prod_id",verifyUserIsAdmin,pc.updateProduct.bind(pc))
+router.put("/:prod_id", verifyUserIsAdmin, pc.updateProduct.bind(pc))
 module.exports = router;

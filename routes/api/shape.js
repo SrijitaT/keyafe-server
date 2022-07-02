@@ -1,7 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const shape_controller = require("../../controller/ShapeController");
-const {verifyUserIsAdmin} = require("../../middleware/validateToken");
+const { verifyUserIsAdmin } = require("../../middleware/validateToken");
 
 /**
   * @swagger
@@ -32,7 +32,7 @@ const {verifyUserIsAdmin} = require("../../middleware/validateToken");
   *       200:
   *         description: Shape uploaded succesfully
   */
-router.post("/upload",verifyUserIsAdmin,shape_controller.addNewShape.bind(shape_controller));
+router.post("/upload", verifyUserIsAdmin, shape_controller.addNewShape.bind(shape_controller));
 /**
  * @swagger
  * /shapes:
@@ -45,7 +45,7 @@ router.post("/upload",verifyUserIsAdmin,shape_controller.addNewShape.bind(shape_
  *       200:
  *         description: Retrieved all Shapes
  */
-router.get("/",shape_controller.getAllShapes);
+router.get("/", shape_controller.getAllShapes);
 
 
 module.exports = router;

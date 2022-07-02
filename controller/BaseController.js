@@ -2,43 +2,43 @@ const _ = require('lodash');
 const reqHandler = require("../helpers/utils/RequestHandler");
 //p.then(onFulfilled[, onRejected]); - used this after await
 class BaseController {
-    constructor(options){
-        this.limit = 20;
+	constructor (options) {
+		this.limit = 20;
 		this.options = options;
-    }
-	getDataValueFromSequelizeRes(seq_res){
-		if(Array.isArray(seq_res)){
+	}
+	getDataValueFromSequelizeRes (seq_res) {
+		if (Array.isArray(seq_res)) {
 			return seq_res.map(s=>{
 				return s.dataValues
 			});
 		}
 		return seq_res.dataValues;
 	}
-    async getById(req,modelName,id){
-        const reqParam = req ? req.params.id : id;
+	async getById (req, modelName, id) {
+		const reqParam = req ? req.params.id : id;
 		let result;
 		try {
 			result = await req.app.get('db')[modelName].findByPk(reqParam);
 			reqHandler.throwIf(result => !result, 404, 'not found', 'Resource not found');
 		} catch (err) {
-			let errorObj = err.status && err.errorType ? err : {status:500,errorType:"sequelize error ,some thing wrong with either the data base connection or schema",errorMsg:err};
+			let errorObj = err.status && err.errorType ? err : { status:500, errorType:"sequelize error ,some thing wrong with either the data base connection or schema", errorMsg:err };
 			return Promise.reject(errorObj);
 		}
 		return result;
-    }
-    async getByCustomOptions(req,modelName,options){
-        let result;
+	}
+	async getByCustomOptions (req, modelName, options) {
+		let result;
 		try {
 			result = await req.app.get('db')[modelName].findOne(options);
 		} catch (err) {
 			return Promise.reject(err);
 		}
 		return result;
-    }
-	async getAllByCustomOptions(req,modelName,options){
-        let result;
+	}
+	async getAllByCustomOptions (req, modelName, options) {
+		let result;
 		try {
-			if(options)
+			if (options)
 				result = await req.app.get('db')[modelName].findAll(options);
 			else
 				result = await req.app.get('db')[modelName].findAll();
@@ -46,9 +46,9 @@ class BaseController {
 			return Promise.reject(err);
 		}
 		return result;
-    }
-    async deleteById(req,modelName){
-        const reqParam = req.params.id;
+	}
+	async deleteById (req, modelName) {
+		const reqParam = req.params.id;
 		let result;
 		try {
 			result = await req.app.get('db')[modelName].destroy({
@@ -59,13 +59,13 @@ class BaseController {
 			reqHandler.throwIf(r => r < 1, 404, 'not found', 'No record matches the Id provided');
 			//return Promise.resolve(result)
 		} catch (err) {
-			let errorObj = err.status && err.errorType ? err : {status:500,errorType:"sequelize error",errorMsg:err}; //if errorObj is already formed then use it
+			let errorObj = err.status && err.errorType ? err : { status:500, errorType:"sequelize error", errorMsg:err }; //if errorObj is already formed then use it
 			return Promise.reject(errorObj);
 		}
 		return result;
-    }
-    async create(req,modelName,data,transaction){
-        let obj = data;
+	}
+	async create (req, modelName, data, transaction) {
+		let obj = data;
 		if (_.isUndefined(obj)) {
 			obj = req.body;
 		}
@@ -74,14 +74,14 @@ class BaseController {
 			result = await req.app.get('db')[modelName].build(obj).save(transaction);
 			reqHandler.throwIf(result => !result, 500, 'Internal server error', 'something went wrong couldnt save data')
 		} catch (err) {
-			let errorObj = err.status && err.errorType ? err : {status:500,errorType:"sequelize error",errorMsg:err}; //if errorObj is already formed then use it
+			let errorObj = err.status && err.errorType ? err : { status:500, errorType:"sequelize error", errorMsg:err }; //if errorObj is already formed then use it
 			return Promise.reject(errorObj);
 		}
 		return result;
-    }
-    async updateById(req,modelName,data,key){
-        const recordID = req.params[key ? key : 'id'];
-		console.log("recordId===",req.params);
+	}
+	async updateById (req, modelName, data, key) {
+		const recordID = req.params[key ? key : 'id'];
+		console.log("recordId===", req.params);
 		let result;
 
 		try {
@@ -94,13 +94,13 @@ class BaseController {
 			reqHandler.throwIf(result => !result, 500, 'Internal server error', 'something went wrong couldnt update data')				
 			//return Promise.resolve(updatedRecored)	
 		} catch (err) {
-			let errorObj = err.status && err.errorType ? err : {status:500,errorType:"sequelize error",errorMsg:err}; //if errorObj is already formed then use it
+			let errorObj = err.status && err.errorType ? err : { status:500, errorType:"sequelize error", errorMsg:err }; //if errorObj is already formed then use it
 			return Promise.reject(errorObj);
 		}
 		return result;
-    }
-    async updateByCustomWhere(req,modelName,data,options){
-        let result;
+	}
+	async updateByCustomWhere (req, modelName, data, options) {
+		let result;
 
 		try {
 			result = await req.app.get('db')[modelName]
@@ -109,13 +109,13 @@ class BaseController {
 				})
 			reqHandler.throwIf(result => !result, 500, 'Internal server error', 'something went wrong couldnt update data')
 		} catch (err) {
-			let errorObj = err.status && err.errorType ? err : {status:500,errorType:"sequelize error",errorMsg:err}; //if errorObj is already formed then use it
+			let errorObj = err.status && err.errorType ? err : { status:500, errorType:"sequelize error", errorMsg:err }; //if errorObj is already formed then use it
 			return Promise.reject(errorObj);
 		}
 		return result;
-    }
-    async getList(req,modelName,options){
-        const page = req.query.page;
+	}
+	async getList (req, modelName, options) {
+		const page = req.query.page;
 
 		let results;
 		try {
@@ -140,11 +140,11 @@ class BaseController {
 			reqHandler.throwIf(results => !results, 500, 'Internal server error', 'something went wrong while fetching data');
 			//return Promise.resolve(results);
 		} catch (err) {
-			let errorObj = err.status && err.errorType ? err : {status:500,errorType:"sequelize error",errorMsg:err}; //if errorObj is already formed then use it
+			let errorObj = err.status && err.errorType ? err : { status:500, errorType:"sequelize error", errorMsg:err }; //if errorObj is already formed then use it
 			return Promise.reject(errorObj);
 		}
 		 return results;
-    }
+	}
 }
 
 module.exports = BaseController;

@@ -21,7 +21,7 @@ const pdc = require("../../controller/ProductDetailsController");
  *         description: Retrieved Productdetails of a particular product
  */
 
- router.get("/:id",pdc.getProdDetails.bind(pdc))
+router.get("/:id", pdc.getProdDetails.bind(pdc))
 
 
- module.exports = router;
+module.exports = router;

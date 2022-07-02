@@ -1,7 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const cc = require("../../controller/CategoriesController");
-const {verifyUserIsAdmin} = require("../../middleware/validateToken");
+const { verifyUserIsAdmin } = require("../../middleware/validateToken");
 /**
    * @swagger
    * definitions:
@@ -56,7 +56,7 @@ const {verifyUserIsAdmin} = require("../../middleware/validateToken");
   *         description: New category created
   */
 
-router.post("/upload",verifyUserIsAdmin, cc.upload.bind(cc), cc.insertToDbAfterUpload.bind(cc));
+router.post("/upload", verifyUserIsAdmin, cc.upload.bind(cc), cc.insertToDbAfterUpload.bind(cc));
 
 /**
  * @swagger
@@ -72,6 +72,6 @@ router.post("/upload",verifyUserIsAdmin, cc.upload.bind(cc), cc.insertToDbAfterU
  *         schema:
  *           $ref: '#/definitions/category'
  */
-router.get("/",cc.getAllCategories)
+router.get("/", cc.getAllCategories)
 
 module.exports = router;

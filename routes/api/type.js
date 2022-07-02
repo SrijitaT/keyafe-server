@@ -1,7 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const type_controller = require("../../controller/TypeController");
-const {verifyUserIsAdmin} = require("../../middleware/validateToken");
+const { verifyUserIsAdmin } = require("../../middleware/validateToken");
 
 /**
   * @swagger
@@ -32,7 +32,7 @@ const {verifyUserIsAdmin} = require("../../middleware/validateToken");
   *       200:
   *         description: Type uploaded succesfully
   */
-router.post("/upload",verifyUserIsAdmin,type_controller.addNewType.bind(type_controller));
+router.post("/upload", verifyUserIsAdmin, type_controller.addNewType.bind(type_controller));
 /**
  * @swagger
  * /types:
@@ -45,7 +45,7 @@ router.post("/upload",verifyUserIsAdmin,type_controller.addNewType.bind(type_con
  *       200:
  *         description: Retrieved all Types
  */
-router.get("/",type_controller.getAllTypes);
+router.get("/", type_controller.getAllTypes);
 
 
 module.exports = router;

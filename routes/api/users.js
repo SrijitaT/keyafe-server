@@ -2,7 +2,7 @@ const express = require("express");
 const router = express.Router();
 const uc = require("../../controller/UserController");
 const uac = require("../../controller/UserAddressController");
-const {validateCurrentUser} = require("../../middleware/validateToken");
+const { validateCurrentUser } = require("../../middleware/validateToken");
 /**
   * @swagger
   * /users/register:
@@ -119,7 +119,7 @@ router.post("/login", uc.loginUser.bind(uc));
   *         description: Address added successfully!
   */
 
-router.post("/address",validateCurrentUser,uac.add.bind(uac))
+router.post("/address", validateCurrentUser, uac.add.bind(uac))
 /**
  * @swagger
  * /users/address/{user_id}:
@@ -140,6 +140,6 @@ router.post("/address",validateCurrentUser,uac.add.bind(uac))
  *       200:
  *         description: Retrieved Productdetails of a particular product
  */
-router.get("/address/:user_id",validateCurrentUser,uac.getAddressByUserId.bind(uac))
+router.get("/address/:user_id", validateCurrentUser, uac.getAddressByUserId.bind(uac))
 
 module.exports = router;

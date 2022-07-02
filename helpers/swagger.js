@@ -10,9 +10,9 @@ const path = require('path');
 const _ = require('lodash');
 const config = require('../config/app.config.js');
 
-const paths=['./routes/api/users.js','./routes/api/categories.js',
-'./routes/api/products.js','./routes/api/shape.js','./routes/api/type.js',
-'./routes/api/flavours.js','./routes/api/productDetails.js']
+const paths=['./routes/api/users.js', './routes/api/categories.js',
+	'./routes/api/products.js', './routes/api/shape.js', './routes/api/type.js',
+	'./routes/api/flavours.js', './routes/api/productDetails.js']
 const options = {
 	swaggerDefinition: {
 		info: {
@@ -85,7 +85,7 @@ router.get('/json', (req, res) => {
 
 router.use('/', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 
-function validateModel(name, model) {
+function validateModel (name, model) {
 	const responseValidation = swaggerSpec.validateModel(name, model, false, true);
 	if (!responseValidation.valid) {
 		throw new Error('Model doesn\'t match Swagger contract');

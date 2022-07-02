@@ -1,7 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const fl_controller = require("../../controller/FlavourController");
-const {verifyUserIsAdmin} = require("../../middleware/validateToken");
+const { verifyUserIsAdmin } = require("../../middleware/validateToken");
 
 /**
   * @swagger
@@ -32,7 +32,7 @@ const {verifyUserIsAdmin} = require("../../middleware/validateToken");
   *       200:
   *         description: Flavours uploaded succesfully
   */
-router.post("/upload",verifyUserIsAdmin,fl_controller.addNewflavour.bind(fl_controller));
+router.post("/upload", verifyUserIsAdmin, fl_controller.addNewflavour.bind(fl_controller));
 /**
  * @swagger
  * /flavours:
@@ -45,7 +45,7 @@ router.post("/upload",verifyUserIsAdmin,fl_controller.addNewflavour.bind(fl_cont
  *       200:
  *         description: Retrieved all Flavours
  */
-router.get("/",fl_controller.getAllFlavours);
+router.get("/", fl_controller.getAllFlavours);
 
 
 module.exports = router;
